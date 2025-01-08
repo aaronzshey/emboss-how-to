@@ -29,4 +29,57 @@ Great!  Now you have a tarball (.tar).  Thankfully, Windows does come with a tar
 
 Wonderful!  It'll take about a minute for Windows to extract everything in the EMBOSS folder.  Almost done!
 
-## Step 3: Install 
+## Step 3: Install WSL
+
+Everyone knows that using the Windows command line is like talking to the spawn of the devil himself.  Create-Item, Remove-Item, Get-Help, etc, etc... whoever invented PowerShell sits right next to Microsoft Word in hell.  
+
+Thankfully, Windows knows they suck so now you can run timeless Linux commands thru WSL - windows subsystem for Linux.
+
+A quick Bing search will tell you to run "wsl --install."  DO NOT!
+
+On my computer, this command got stuck at 0% for an hour.  
+
+Instead, open the Windows Store and search "Linux."  You'll see something like Ubuntu 24.0.4 LTS - just choose the one with the highest number and the words LTS after it and click install.
+
+On to the last step:
+
+## Step 4: Building
+
+First, move the EMBOSS-6.6.0 folder into your Linux folder. Linux is listed on the left hand sidebar of File Explorer, underneath "This PC" and "Network Drives".  Copy the EMBOSS-6.6.0 folder from your "C:\Users\yourusername" into "/home/yourusername".
+
+Now open your Linux terminal.  You can do this by pressing the Windows menu and searching "Linux".
+
+Run the following commands:
+
+```sh
+cd EMBOSS-6.6.0
+sudo apt-get upgrade
+sudo apt-get install gcc
+sudo apt install make
+cd EMBOSS-6.6.0
+./configure --without-x
+make
+```
+
+Make takes a while.  When it's done, test with the command:
+
+```
+embossversion
+```
+
+It should work!  If it doesn't, too bad.
+
+And then set your PATH:
+
+```
+export PATH=home/yourusername/EMBOSS-6.6.0/emboss:$PATH
+
+```
+
+## Step 5: How come I can't just `sudo apt install emboss`?
+
+I dunno.  Didn't work on my machine.  I could install gcc and make though.
+
+
+
+
